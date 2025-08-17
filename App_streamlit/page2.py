@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 from utils import load_parquet_data
+import os
 
 
 # --- Configuration des chemins ---
