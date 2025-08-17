@@ -5,6 +5,7 @@ import streamlit as st
 # ---------------------------
 # Configuration de la page
 # ---------------------------
+
 st.set_page_config(
     page_title="Fullstacks Analytics Pipelines",
     page_icon="🚀",
@@ -16,6 +17,8 @@ st.set_page_config(
 # ---------------------------
 
 # Définition des pages avec icônes
+BASE_DIR = os.path.dirname(__file__)
+
 pages = {
     "🏠 Home": "App_streamlit/App.py",                        # Page d'accueil / présentation du projet
     "👤 A propos": "App_streamlit/page1.py",                  # Visualisations générales et pipeline
@@ -28,7 +31,7 @@ st.sidebar.title("📌 Navigation")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Chargement de la page sélectionnée
-page_file = pages[selection]
+page_file = os.path.join(BASE_DIR, pages[selection])
 if os.path.exists(page_file):
     with open(page_file, "r", encoding="utf-8") as f:
         code = f.read()
