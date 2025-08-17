@@ -40,7 +40,7 @@ pip-delete-this-directory.txt
 ####################################
 #         FICHIERS PARQUET         #
 ####################################
-Data/**/*.parquet  # si tes fichiers sont dans un dossier "Data/"
+*.parquet  
 
 ####################################
 #       LOGS & FICHIERS TEMP       #
