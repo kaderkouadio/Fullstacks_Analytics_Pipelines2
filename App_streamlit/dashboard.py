@@ -29,7 +29,6 @@ selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Chargement de la page sélectionnée
 page_file = pages[selection]
-
 if os.path.exists(page_file):
     with open(page_file, "r", encoding="utf-8") as f:
         code = f.read()
