@@ -1,5 +1,7 @@
 ###############################################
 import os
+import sys
+import importlib.util
 import streamlit as st
 
 # ---------------------------
@@ -18,6 +20,8 @@ st.set_page_config(
 
 # Définition des pages avec icônes
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 # Pages disponibles (fichiers dans App_streamlit/)
 pages = {
@@ -30,14 +34,15 @@ pages = {
 st.sidebar.title("📌 Navigation")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
-# Construction du chemin exact
-page_file = os.path.join(BASE_DIR, pages[selection])
+module_name = pages[selection]
+module_path = os.path.join(BASE_DIR, f"{module_name}.py")
 
-if os.path.exists(page_file):
-    with open(page_file, "r", encoding="utf-8") as f:
-        exec(f.read(), globals())
+if os.path.exists(module_path):
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
 else:
-    st.error(f"❌ Fichier {page_file} introuvable")
+    st.error(f"❌ Fichier {module_path} introuvable")
 
 
 
