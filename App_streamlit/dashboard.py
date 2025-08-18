@@ -17,26 +17,23 @@ st.set_page_config(
 # ---------------------------
 
 # Définition des pages avec icônes
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 pages = {
-    "🏠 Home": "App.py",                        # Page d'accueil / présentation du projet
-    "👤 A propos": "page1.py",                  # Visualisations générales et pipeline
-    "📊 Analyse exploratoire": "page2.py",      # Analyse des données détaillée
-    "🔎 Prédiction": "page3.py"                 # Formulaire de prédiction taxi
+    "🏠 Home": "App.py",
+    "👤 A propos": "page1.py",
+    "📊 Analyse exploratoire": "page2.py",
+    "🔎 Prédiction": "page3.py"
 }
 
-# Barre latérale pour la navigation
-st.sidebar.title("📌 Navigation")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
-
-# Chargement de la page sélectionnée
 page_file = os.path.join(BASE_DIR, pages[selection])
-if os.path.exists(page_file):
+
+if os.path.isfile(page_file):
     with open(page_file, "r", encoding="utf-8") as f:
-        code = f.read()
-        exec(code, globals())
+        exec(f.read(), globals())
 else:
     st.error(f"❌ Fichier {page_file} introuvable")
+
 
 
