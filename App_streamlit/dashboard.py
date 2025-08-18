@@ -35,7 +35,7 @@ st.sidebar.title("📌 Navigation")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 module_name = pages[selection]
-module_path = os.path.join(BASE_DIR, f"{module_name}.py")
+module_path = os.path.join(BASE_DIR, f"{module_name}")
 
 if os.path.exists(module_path):
     spec = importlib.util.spec_from_file_location(module_name, module_path)
